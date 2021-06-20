@@ -20,32 +20,18 @@ Policy
             effects = SetTargetInfluence value = Value
                         + (NamedReal name = "PLC_CONFEDERATION_SUPPLY_DISCONNECTED_INFLUENCE_FLAT" value = [[SUPPLY_DISCONNECTED_INFLUENCE_MALUS]])
 
-        // makes all planets less stable
+        // makes all planets slightly more stable (compensates for the loss of distance to capital bonus)
         EffectsGroup
             scope = And [
                 Planet
+                Not Capital
                 OwnedBy empire = Source.Owner
                 Population low = 0.001
             ]
             effects = [
-                SetTargetHappiness value = Value 
-                    + (NamedReal name = "PLC_CONFEDERATION_TARGET_HAPPINESS_FLAT" value = -1)
-                SetMaxTroops value = Value
-                    + (NamedReal name = "PLC_CONFEDERATION_MAX_TROOPS_FLAT" value = 5)
+                SetTargetHappiness value = Value + (NamedReal name = "PLC_CONFEDERATION_TARGET_HAPPINESS_FLAT" value = 2)
+                SetMaxTroops value = Value + (NamedReal name = "PLC_CONFEDERATION_MAX_TROOPS_FLAT" value = 5)
             ]
-
-        // compensates for supply disconnection stability penalty
-        EffectsGroup
-            scope = And [
-                Planet
-                OwnedBy empire = Source.Owner
-                Not ResourceSupplyConnected empire = Source.Owner condition = And [
-                    Or [Capital Building name = "BLD_REGIONAL_ADMIN"]
-                    OwnedBy empire = Source.Owner
-                ]
-                Not Capital
-            ]
-            effects = SetTargetHappiness value = Value + (NamedRealLookup name = "DISCONNECTED_FROM_CAPITAL_AND_REGIONAL_ADMIN_STABILITY_PENALTY")
     ]
     graphic = "icons/policies/confederation.png"
 

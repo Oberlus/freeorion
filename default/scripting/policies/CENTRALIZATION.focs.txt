@@ -48,6 +48,7 @@ Policy
         EffectsGroup
             scope = And [
                 Planet
+                Not Capital
                 OwnedBy empire = Source.Owner
                 Population low = 0.001
                 ResourceSupplyConnected empire = LocalCandidate.Owner condition = And [
@@ -55,12 +56,26 @@ Policy
                     OwnedBy empire = Source.Owner
                     Capital
                 ]
-                Not Capital
             ]
             effects = SetTargetInfluence value = Value + max(
                         (NamedReal name = "PLC_CENTRALIZATION_TARGET_INFLUENCE_MAX" value = -3),
                         (NamedReal name = "PLC_CENTRALIZATION_TARGET_INFLUENCE_PERJUMP" value = -0.2)
                             * JumpsBetween object = Source.ID object = Target.ID)
+
+        EffectsGroup    // overrides disconnection penalty in happiness.macros with a greater penalty
+            scope = And [
+                Planet
+                Not Capital
+                OwnedBy empire = Source.Owner
+                Population low = 0.001
+                Not ResourceSupplyConnected empire = LocalCandidate.Owner condition = And [
+                    Planet
+                    OwnedBy empire = Source.Owner
+                    Capital
+                ]
+            ]
+            accountinglabel = "CENTRALIZATION_DISCONNECTION_LABEL"
+            effects = SetTargetHappiness value = Value - (NamedReal name = "DISCONNECTED_CENTRALIZATION_STABILITY_PENALTY" value = 10)
     ]
     graphic = "icons/policies/centralization.png"
 

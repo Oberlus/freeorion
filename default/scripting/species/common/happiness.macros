@@ -166,6 +166,10 @@ JUMPS_TO_CAPITAL_OR_REGAD
             ]
 '''
 
+
+/// Statistic If condition = EmpireHasAdoptedPolicy name = "PLC_ISOLATION"
+/// Statistic If condition = EmpireHasAdoptedPolicy name = "PLC_CENTRALIZATION"
+
 STANDARD_SPECIES_CAPITAL_SUPPLY_CONNECTION_STABILITY
 '''
         EffectsGroup    // close supply connected to capital planet is more stable
@@ -174,6 +178,8 @@ STANDARD_SPECIES_CAPITAL_SUPPLY_CONNECTION_STABILITY
                 Planet
                 Not Unowned
                 Not Capital
+                Not EmpireHasAdoptedPolicy name = "PLC_ISOLATION"
+                Not EmpireHasAdoptedPolicy name = "PLC_CONFEDERATION"
                 [[SUPPLY_CONNECTED_TO_CAPITAL_OR_REGAD]]
                 ([[JUMPS_TO_CAPITAL_OR_REGAD]] < 5)
             ]
@@ -186,20 +192,24 @@ STANDARD_SPECIES_CAPITAL_SUPPLY_CONNECTION_STABILITY
                 Planet
                 Not Unowned
                 Not Capital
+                Not EmpireHasAdoptedPolicy name = "PLC_ISOLATION"
+                Not EmpireHasAdoptedPolicy name = "PLC_CONFEDERATION"
                 [[SUPPLY_CONNECTED_TO_CAPITAL_OR_REGAD]]
                 ([[JUMPS_TO_CAPITAL_OR_REGAD]] > 5)
             ]
             accountinglabel = "CAPITAL_POOR_CONNECTION_LABEL"
             effects = SetTargetHappiness value = Value + max(-5, 5 - [[JUMPS_TO_CAPITAL_OR_REGAD]])
 
-        EffectsGroup    // no connection is much less stable
+        EffectsGroup    // no connection gets maximum distance penalty
             scope = Source
             activation = And [
                 Planet
                 Not Unowned
                 Not Capital
+                Not EmpireHasAdoptedPolicy name = "PLC_ISOLATION"
+                Not EmpireHasAdoptedPolicy name = "PLC_CENTRALIZATION"
                 Not [[SUPPLY_CONNECTED_TO_CAPITAL_OR_REGAD]]
             ]
             accountinglabel = "CAPITAL_DISCONNECTION_LABEL"
-            effects = SetTargetHappiness value = Value - (NamedReal name = "DISCONNECTED_FROM_CAPITAL_AND_REGIONAL_ADMIN_STABILITY_PENALTY" value = 10)
+            effects = SetTargetHappiness value = Value - (NamedReal name = "DISCONNECTED_FROM_CENTER_STABILITY_PENALTY" value = 5)
 '''

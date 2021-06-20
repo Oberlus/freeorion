@@ -11446,9 +11446,9 @@ PLC_CENTRALIZATION_DESC
 • Increases [[metertype METER_TARGET_RESEARCH]] by [[value PLC_CENTRALIZATION_TARGET_RESEARCH_PERPOP]] per [[metertype METER_POPULATION]].
 • Increases [[metertype METER_TARGET_INDUSTRY]] by [[value PLC_CENTRALIZATION_TARGET_INDUSTRY_PERPOP]] per population.
 • Increases [[metertype METER_TARGET_CONSTRUCTION]] by [[value PLC_CENTRALIZATION_TARGET_CONSTRUCTION_FLAT]].
-However, it also reduces [[metertype METER_SUPPLY]] range ([[value PLC_CENTRALIZATION_MAX_SUPPLY_FLAT]]) and [[metertype METER_STOCKPILE]] ([[value PLC_CENTRALIZATION_MAX_STOCKPILE_FLAT]]), and increases the [[metertype METER_INFLUENCE]] cost of the empire's colonies:
+However, it reduces [[metertype METER_SUPPLY]] range ([[value PLC_CENTRALIZATION_MAX_SUPPLY_FLAT]]) and [[metertype METER_STOCKPILE]] ([[value PLC_CENTRALIZATION_MAX_STOCKPILE_FLAT]]), and also increases the [[metertype METER_INFLUENCE]] cost of the empire's colonies :
 • [[metertype METER_SUPPLY]] connected colonies get a penalization of [[value PLC_CENTRALIZATION_TARGET_INFLUENCE_PERJUMP]] per jump distance to the capital, capped at [[value PLC_CENTRALIZATION_TARGET_INFLUENCE_MAX]].
-• Colonies not [[metertype METER_SUPPLY]] connected to the capital gets the maximum penalization ([[value PLC_CENTRALIZATION_TARGET_INFLUENCE_MAX]]).
+• Colonies not [[metertype METER_SUPPLY]] connected to the capital gets the maximum penalization ([[value PLC_CENTRALIZATION_TARGET_INFLUENCE_MAX]]), and the [[metertype METER_TARGET_HAPPINESS]] penalty increases up to [[value DISCONNECTED_CENTRALIZATION_STABILITY_PENALTY]].
 
 Logistics of the whole empire are focused into boosting the capital's production, by diverting there most of the social and material resources. This causes some resentment in the colonies, which increases [[metertype METER_INFLUENCE]] costs.
 
@@ -11634,9 +11634,8 @@ PLC_CONFEDERATION_DESC
 '''Planets of the empire are organized in a confederacy of independent systems.
 
 • Increases [[metertype METER_TARGET_INFLUENCE]] on colonies disconnected from the capital by [[value PLC_CONFEDERATION_SUPPLY_DISCONNECTED_INFLUENCE_FLAT]]
-• Increases [[metertype METER_TARGET_HAPPINESS]] on colonies disconnected from the capital and regional administrative centres by [[value DISCONNECTED_FROM_CAPITAL_AND_REGIONAL_ADMIN_STABILITY_PENALTY]]
-• Reduces [[metertype METER_TARGET_HAPPINESS]] ([[value PLC_CONFEDERATION_TARGET_HAPPINESS_FLAT]]) on all planets
-• Increases [[metertype METER_MAX_TROOPS]] by [[value PLC_CONFEDERATION_MAX_TROOPS_FLAT]]'''
+• Increases [[metertype METER_TARGET_HAPPINESS]] by [[value PLC_CONFEDERATION_TARGET_HAPPINESS_FLAT]] and [[metertype METER_MAX_TROOPS]] by [[value PLC_CONFEDERATION_MAX_TROOPS_FLAT]] on all colonies
+• Removes the [[metertype METER_TARGET_HAPPINESS]] modifier based on distance to Capital'''
 
 PLC_CONFEDERATION_SHORT_DESC
 Supports disconnected systems
@@ -16332,7 +16331,10 @@ SPECIES_HOMEWORLD_INDEPENDENCE_DESIRE_LABEL
 Homeworld Independence Movement
 
 CAPITAL_DISCONNECTION_LABEL
-Not Connected to Empire Capital
+Not Connected to Empire center
+
+CENTRALIZATION_DISCONNECTION_LABEL
+Not Connected to Empire center (Centralization) 
 
 ARTISAN_APPRECIATION
 Likes Influence-Focused Artistic Species In System
