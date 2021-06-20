@@ -1,4 +1,3 @@
-
 BASE_INFLUENCE_COSTS
 '''EffectsGroup      // colonies consume influence, proportional to square-root of how many populated planets and non-populated outposts the empire controls
             scope = Source
@@ -11,8 +10,9 @@ BASE_INFLUENCE_COSTS
             accountinglabel = "COLONY_ADMIN_COSTS_LABEL"
             priority = [[TARGET_LAST_BEFORE_OVERRIDE_PRIORITY]]
             effects = SetTargetInfluence value = Value -
-                (NamedReal name = "COLONY_ADMIN_COSTS_PER_PLANET" value = 0.4) * ((
-                    Statistic Count condition = And [
+                (NamedReal name = "COLONY_ADMIN_COSTS_PER_PLANET" value = 0.4) * 
+                (1 - 0.25*(Statistic If condition = EmpireHasAdoptedPolicy empire = Source.Owner name = "PLC_ISOLATION")) *
+                ((Statistic Count condition = And [
                         Planet
                         OwnedBy empire = Source.Owner
                         Species
