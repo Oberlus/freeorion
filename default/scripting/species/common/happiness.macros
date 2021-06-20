@@ -78,6 +78,29 @@ COMMON_HAPPINESS_EFFECTS
                 min(abs(Value(Target.TargetHappiness) - Value), 1) *
                     (1 - 2*(Statistic If condition = And [Target (Value > Value(Target.TargetHappiness))]))
 
+        // more stable on good planets, less with worse environment
+        EffectsGroup
+            scope = Source
+            activation = Planet environment = Hostile
+            effects = SetTargetHappiness value = Value - 3 accountinglabel = "HOSTILE_ENVIRONMENT_LABEL"
+
+/*
+        EffectsGroup
+            scope = Source
+            activation = Planet environment = Poor
+            effects = SetTargetHappiness value = Value + 0 accountinglabel = "POOR_ENVIRONMENT_LABEL"
+*/
+
+        EffectsGroup
+            scope = Source
+            activation = Planet environment = Adequate
+            effects = SetTargetHappiness value = Value + 3 accountinglabel = "ADEQUATE_ENVIRONMENT_LABEL"
+
+        EffectsGroup
+            scope = Source
+            activation = Planet environment = Good
+            effects = SetTargetHappiness value = Value + 5 accountinglabel = "GOOD_ENVIRONMENT_LABEL"
+
         EffectsGroup    // more stable when liked focuses are adopted
             scope = Source
             activation = And [
